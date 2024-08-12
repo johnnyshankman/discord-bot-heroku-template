@@ -1,6 +1,6 @@
-# Discord Bot
+# Discord Bot Heroku Template
 
-Built to run perpetualy as a worker process on Heroku free tier. Has a clear separation of concerns between the bot and the commands it can run. This allows for easy extensibility and maintainability.
+Built to run perpetualy as a worker process on Heroku free tier. Has a clear separation of concerns between the bot and the commands it can run. This allows for easy extensibility and maintainability. Written in typescript and ran as a daemon process using `ts-node`.
 
 ## Running Locally
 
