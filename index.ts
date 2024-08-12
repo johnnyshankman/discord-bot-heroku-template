@@ -16,6 +16,7 @@ const { clientId, guildId, token } = config
 /**
  * @dev Create a new Discord client instance and set the intents.
  * The intents are used to specify what events the bot will listen to.
+ * @ref https://discord.com/developers/docs/topics/gateway#list-of-intents
  */
 const client = new Client({ intents:
   [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES]
