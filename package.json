@@ -22,7 +22,8 @@
   "keywords": [
     "node",
     "heroku",
-    "express"
+    "express",
+    "typescript"
   ],
   "license": "MIT"
 }
