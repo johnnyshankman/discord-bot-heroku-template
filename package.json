@@ -1,0 +1,31 @@
+{
+  "name": "discord-bot-heroku-template",
+  "version": "1.0.0",
+  "description": "Discord Bot built to run on Heroku",
+  "engines": {
+    "node": "20.x"
+  },
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.mjs",
+    "lint": "eslint index.mjs --fix",
+    "deploy": "git push heroku main"
+  },
+  "dependencies": {
+    "@discordjs/builders": "^0.6.0",
+    "@discordjs/rest": "^0.1.0-canary.0",
+    "discord-api-types": "^0.23.1",
+    "discord.js": "^13.2.0",
+    "eslint": "^7.32.0"
+  },
+  "devDependencies": {
+    "got": "^11.3.0",
+    "tape": "^4.7.0"
+  },
+  "keywords": [
+    "node",
+    "heroku",
+    "express"
+  ],
+  "license": "MIT"
+}
