@@ -3,6 +3,9 @@ import { REST } from '@discordjs/rest'
 import { Routes } from 'discord-api-types/v9'
 import { Client, Intents, MessageEmbed } from 'discord.js'
 import { SlashCommandBuilder } from '@discordjs/builders'
+import { handlePing } from './handlers/ping'
+import { handleTest } from './handlers/test'
+
 
 /**
  * @dev Load the config file with the bot's token, client ID, and guild ID
@@ -46,30 +49,19 @@ client.on('interactionCreate', async (interaction) => {
     return
   }
 
-  const { commandName } = interaction
-
+  // Some logging to see who is interacting with the bot
   const interactionUser = await interaction?.guild?.members.fetch(interaction.user.id)
   console.log(`User Interacted: ${interactionUser?.user.username}#${interactionUser?.user.discriminator} (${interactionUser?.user.id})`)
 
+
+  const { commandName } = interaction
+
   if (commandName === 'ping') {
-    client.user.setActivity(`Pong!`)
-    await interaction.reply('Pong!')
+    await handlePing(client, interaction);
   }
 
   else if (commandName === 'test') {
-    client.user.setActivity(`Hello test`)
-    const embed = new MessageEmbed()
-      .setTitle(`HELLO test`)
-      .setDescription(`A DESCRIPTION`)
-      .setColor(0x00AE86)
-      .setThumbnail('https://avatars.githubusercontent.com/u/6632701?v=4')
-      .setTimestamp()
-      .setURL('https://www.google.com')
-      .setFooter("Powered by White Lights")
-
-    await interaction.editReply({
-      embeds: [embed]
-    })
+    await handleTest(client, interaction);
   }
 })
 
