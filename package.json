@@ -7,8 +7,8 @@
   },
   "main": "index.js",
   "scripts": {
-    "start": "node index.mjs",
-    "lint": "eslint index.mjs --fix",
+    "start": "ts-node index.ts",
+    "lint": "eslint index.ts --fix",
     "deploy": "git push heroku main"
   },
   "dependencies": {
@@ -16,11 +16,8 @@
     "@discordjs/rest": "^0.1.0-canary.0",
     "discord-api-types": "^0.23.1",
     "discord.js": "^13.2.0",
-    "eslint": "^7.32.0"
-  },
-  "devDependencies": {
-    "got": "^11.3.0",
-    "tape": "^4.7.0"
+    "eslint": "^7.32.0",
+    "ts-node": "^10.9.2"
   },
   "keywords": [
     "node",
