@@ -1,6 +1,6 @@
 # Discord Bot Heroku Template
 
-Built to run perpetualy as a worker process on Heroku for very cheap (originally designed for their sunsetted Free Tier). Has a clear separation of concerns between the bot and the commands it can run. This allows for easy extensibility and maintainability. 
+Built to run perpetualy as a worker process on Heroku for very cheap (originally designed for their sunsetted Free Tier). Has a clear separation of concerns between the bot and the commands it can run. This allows for easy extensibility and maintainability.
 
 Written in typescript and runs as a daemon process using `ts-node`.
 
@@ -19,30 +19,62 @@ Bot will run inside of terminal until killed as it's essentially a DAEMON proces
 npm run lint # fixes any issues it can fix automatically
 ```
 
+## Getting Credentials
+
+### Your Bot Token
+1. Go to the [Discord Developer Portal](https://discord.com/developers/applications)
+2. Create a new application
+3. Go to the Bot tab and create a new bot
+4. Copy the token
+
+### Your Guild ID
+1. Go to your Discord server
+2. Right click on the server name in the left sidebar
+3. Click on "Copy ID"
+
+### Your Client ID
+1. Go to the [Discord Developer Portal](https://discord.com/developers/applications)
+2. Click on the application you created earlier
+3. Go to the OAuth2 tab
+3. Copy the Client ID
 
 ## Deploying to Heroku
 
-First you must [install Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli)
+First you must [install Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli) on your local machine. Then use the instructions below to deploy your bot to Heroku.
 
 ```sh
-# log in to Heroku
+# Log in to Heroku
 $ heroku login
 
-# Make this repo connected to hHeroku by doing one of the next two commands
-$ heroku create # connects to a fresh Heroku app with a random generated name
-$ heroku git:remote -a my-cool-discord-bot # connects to existing Heroku app
+# Connect your local repo to a Heroku project by either:
+#   1. creating a fresh Heroku app with a randomly generated name and connecting to it
+$ heroku create
+#   2. connecting to an existing Heroku app
+$ heroku git:remote -a my-cool-heroku-project
 
-# Now you can push code to Heroku and trigger a build
-$ git push heroku main
+# Set up your environment variables (See .env.example for more info)
+$ heroku config:set CLIENT_ID=0
+$ heroku config:set GUILD_ID=0
+$ heroku config:set BOT_TOKEN=XXX.YYY.ZZZ
 
-# This next thing is only necessary to do once lifetime
-# as it turns off the web dyno and turns on the workers dyno.
-# You never want to use web dynos for 24/7 worker code.
+# Turn off the web dyno as this is a bot with only a backend worker dyno
 $ heroku ps:scale web=0 worker=1
+
+# Now you can push code to Heroku and trigger a build any time
+$ git push heroku main
 ```
 
-Now every time you do `git push heroku main` it will rebuild.
+To deploy new code to Heroku, just push to the `main` branch and do a `git push heroku main` to trigger a build.
 
+## Inviting Your Bot to Your Server
+
+1. Go to the [Discord Developer Portal](https://discord.com/developers/applications)
+2. Click on the application you created earlier
+3. Go to the OAuth2 tab
+4. In the "OAuth2 URL Generator" section, select the "bot" scope
+5. Copy the generated URL and paste it into your browser
+6. Select the server you want to invite the bot to
+7. Click "Authorize"
 
 ## Documentation
 
