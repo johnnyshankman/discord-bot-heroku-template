@@ -1,5 +1,5 @@
 import { MessageEmbed } from "discord.js";
-import { handleHello } from "../../command-handlers/hello";
+import { handleHello } from "../../src/command-handlers/hello";
 import { expect, vi, describe, it } from "vitest";
 
 describe('handleHello', () => {
@@ -18,7 +18,6 @@ describe('handleHello', () => {
       editReply,
     } as any;
 
-    const timestamp = new Date();
     await handleHello(client, interaction);
 
     expect(setActivity).toHaveBeenCalledWith('Hello test');
