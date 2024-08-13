@@ -9,6 +9,5 @@
     "forceConsistentCasingInFileNames": true /* Disallow inconsistently-cased references to the same file. */,
     "resolveJsonModule": true,
   },
-  "include": ["src"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "coverage"]
 }
