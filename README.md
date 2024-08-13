@@ -52,6 +52,7 @@ Now every time you do `git push heroku main` it will rebuild.
 
 For more information about using Node.js on Heroku, see these Dev Center articles:
 
+- [Hello Heroku Starter Project](https://github.com/larkintuckerllc/hello-heroku)
 - [Getting Started on Heroku with Node.js](https://devcenter.heroku.com/articles/getting-started-with-nodejs)
 - [Heroku Node.js Support](https://devcenter.heroku.com/articles/nodejs-support)
 - [Node.js on Heroku](https://devcenter.heroku.com/categories/nodejs)
