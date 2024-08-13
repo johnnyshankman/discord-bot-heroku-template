@@ -9,13 +9,15 @@
   "scripts": {
     "start": "ts-node index.ts",
     "lint": "eslint index.ts --fix",
-    "deploy": "git push heroku main"
+    "deploy": "git push heroku main",
+    "test": "vitest"
   },
   "dependencies": {
     "@discordjs/builders": "^0.6.0",
     "@discordjs/rest": "^0.1.0-canary.0",
     "discord-api-types": "^0.23.1",
     "discord.js": "^13.2.0",
+    "dotenv": "^16.4.5",
     "eslint": "^7.32.0",
     "ts-node": "^10.9.2"
   },
@@ -25,5 +27,8 @@
     "express",
     "typescript"
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "vitest": "^2.0.5"
+  }
 }
