@@ -1,7 +1,7 @@
-import { describe, it, expect, beforeAll, vi, beforeEach } from 'vitest';
-import createBot from '../createBot';
-import { commands } from '../commands';
-import { Intents, Client } from 'discord.js'
+import { describe, it, expect, beforeAll, vi, beforeEach, MockedFunction, MockInstance } from 'vitest';
+import createBot from '../src/createBot';
+import { commands } from '../src/commands';
+import { Intents, Client, CommandInteraction } from 'discord.js'
 
 
 const putMock = vi.fn().mockResolvedValue({});
@@ -64,8 +64,8 @@ vi.mock('discord.js', async () => {
 });
 
 describe('Discord Bot Server', () => {
-  let logSpy;
-  let client: Client;
+  let logSpy: MockInstance;
+  let client: Client<boolean>;
 
   beforeAll(async () => {
     logSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
@@ -125,7 +125,7 @@ describe('Discord Bot Server', () => {
         guild: { members: { fetch: vi.fn().mockResolvedValue({ user: { username: 'mockedUsername', discriminator: 'mockedDiscriminator', id: 'mockedUserId' } }) } },
         reply: vi.fn(),
         commandName: 'nonExistentCommand',
-      };
+      } as any as CommandInteraction;
 
       await client.emit('interactionCreate', interaction);
 
@@ -142,7 +142,7 @@ describe('Discord Bot Server', () => {
         guild: { members: { fetch: vi.fn().mockResolvedValue({ user: { username: 'mockedUsername', discriminator: 'mockedDiscriminator', id: 'mockedUserId' } }) } },
         reply: vi.fn(),
         commandName: 'nonExistentCommand',
-      };
+      } as any as CommandInteraction;
 
       await client.emit('interactionCreate', interaction);
 
@@ -156,7 +156,7 @@ describe('Discord Bot Server', () => {
         guild: { members: { fetch: vi.fn().mockResolvedValue({ user: { username: 'mockedUsername', discriminator: 'mockedDiscriminator', id: 'mockedUserId' } }) } },
         reply: vi.fn(),
         commandName: 'nonExistentCommand',
-      };
+      } as any as CommandInteraction;
 
       client.user = null;
 
@@ -177,7 +177,7 @@ describe('Discord Bot Server', () => {
         guild: { members: { fetch: vi.fn().mockResolvedValue({ user: { username: 'mockedUsername', discriminator: 'mockedDiscriminator', id: 'mockedUserId' } }) } },
         reply: vi.fn(),
         commandName: 'ping',
-      };
+      } as any as CommandInteraction;
 
       await client.emit('interactionCreate', interaction);
 
