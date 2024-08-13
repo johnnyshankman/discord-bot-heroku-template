@@ -2,10 +2,7 @@ import fs from 'fs'
 import { REST } from '@discordjs/rest'
 import { Routes } from 'discord-api-types/v9'
 import { Client, Intents, MessageEmbed } from 'discord.js'
-import { SlashCommandBuilder } from '@discordjs/builders'
-import { handlePing } from './handlers/ping'
-import { handleTest } from './handlers/test'
-
+import { commands, handlers } from './commands'
 
 /**
  * @dev Load the config file with the bot's token, client ID, and guild ID
@@ -21,14 +18,6 @@ const { clientId, guildId, token } = config
 const client = new Client({ intents:
   [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES]
 })
-
-/**
- * @dev Configure the commands that the bot will listen to.
- */
-const commands = [
-  new SlashCommandBuilder().setName('ping').setDescription('Replies with pong!'),
-  new SlashCommandBuilder().setName('test').setDescription('Replies with a test embed!'),
-].map(command => command.toJSON())
 
 /**
  * @dev Setup the REST API to register the commands.
@@ -55,15 +44,23 @@ client.on('interactionCreate', async (interaction) => {
   console.log(`User Interacted: ${interactionUser?.user.username}#${interactionUser?.user.discriminator} (${interactionUser?.user.id})`)
 
 
-  const { commandName } = interaction
+  const { commandName } = interaction;
 
-  if (commandName === 'ping') {
-    await handlePing(client, interaction);
+  // if the command is not available, return an error message
+  if (!Object.keys(handlers).includes(commandName)) {
+    await interaction.reply({
+      content: `Command not found: ${commandName}`,
+      ephemeral: true,
+    })
+    return
   }
 
-  else if (commandName === 'test') {
-    await handleTest(client, interaction);
-  }
+  // @note: safe to cast here - commandName is guaranteed to be a key of handlers
+  const handlerKey = commandName as keyof typeof handlers;
+
+  // execute the command handler
+  const handler = handlers[handlerKey];
+  handler(client, interaction);
 })
 
 /**
