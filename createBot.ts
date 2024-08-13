@@ -1,11 +1,10 @@
-import fs from 'fs'
 import { REST } from '@discordjs/rest'
 import { Routes } from 'discord-api-types/v9'
 import { Client, Intents } from 'discord.js'
 import { commands, handlers } from './commands'
 import dotenv from 'dotenv'
 
-const createBot = async () => {
+const createBot = async (): Promise<Client> => {
 
   /**
    * @dev Load the env file with the bot's token, client ID, and guild ID
@@ -87,7 +86,9 @@ const createBot = async () => {
   })
 
   // Login to Discord client token
-  client.login(token)
+  await client.login(token)
+
+  return client;
 };
 
 export default createBot;
