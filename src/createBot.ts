@@ -10,9 +10,14 @@ const createBot = async (): Promise<Client> => {
    * @dev Load the env file with the bot's token, client ID, and guild ID
    */
   dotenv.config()
-  const clientId = process.env.CLIENT_ID || 'NOT_FOUND';;
-  const guildId = process.env.GUILD_ID || 'NOT_FOUND';;
-  const token = process.env.BOT_TOKEN || 'NOT_FOUND';
+
+  if (!process.env.CLIENT_ID || !process.env.GUILD_ID || !process.env.BOT_TOKEN) {
+    throw new Error('CLIENT_ID, GUILD_ID, and BOT_TOKEN must be set');
+  }
+
+  const clientId = process.env.CLIENT_ID;
+  const guildId = process.env.GUILD_ID;
+  const token = process.env.BOT_TOKEN;
 
   /**
    * @dev Create a new Discord client instance and set the intents.
@@ -74,15 +79,10 @@ const createBot = async (): Promise<Client> => {
   client.once('ready', async () => {
     console.log('Starting Discord Bot...')
 
-    if (!client.user) {
-      console.error('Client user is not available.')
-      return
-    }
+    client.user?.setStatus('online')
+    client.user?.setActivity('Hello World')
 
-    client.user.setStatus('online')
-    client.user.setActivity('Hello World')
-
-    console.log(`Discord Bot is ready as ${client.user.tag}!`)
+    console.log(`Discord Bot is ready as ${client.user?.tag}!`)
   })
 
   // Login to Discord client token
