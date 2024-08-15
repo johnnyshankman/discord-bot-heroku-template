@@ -67,8 +67,6 @@ describe('createBot', () => {
   let logSpy: MockInstance;
   let client: Client<boolean>;
 
-
-
   describe('when the environment variables are not set', () => {
     beforeAll(async () => {
       logSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
