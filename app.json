@@ -1,6 +1,0 @@
-{
-  "name": "A Discord Bot",
-  "description": "A Discord Bot",
-  "keywords": ["node", "express", "heroku", "typescript"],
-  "image": "heroku/nodejs"
-}

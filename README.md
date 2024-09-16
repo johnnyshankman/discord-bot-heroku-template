@@ -1,4 +1,4 @@
-# Discord Bot Heroku Template
+# Discord Bot AWS Template
 
 Built to run perpetualy as a worker process on Heroku for very cheap (originally designed for their sunsetted Free Tier). Has a clear separation of concerns between the bot and the commands it can run. This allows for easy extensibility and maintainability. Has 100% test coverage so you can trust that this bot works exactly as intended, and start adding new tests for new commands from a clean slate.
 
@@ -38,33 +38,14 @@ npm run lint # fixes any issues it can fix automatically
 3. Go to the OAuth2 tab
 3. Copy the Client ID
 
-## Deploying to Heroku
+## Deploying to AWS
 
-First you must [install Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli) on your local machine. Then use the instructions below to deploy your bot to Heroku.
+1. Install AWS CLI and configure your AWS credentials.
+2. Install AWS CDK: `npm install -g aws-cdk`
+3. Bootstrap your AWS environment: `cdk bootstrap`
+4. Deploy the stack: `npm run cdk:deploy`
 
-```sh
-# Log in to Heroku
-$ heroku login
-
-# Connect your local repo to a Heroku project by either:
-#   1. creating a fresh Heroku app with a randomly generated name and connecting to it
-$ heroku create
-#   2. connecting to an existing Heroku app
-$ heroku git:remote -a my-cool-heroku-project
-
-# Set up your environment variables (See .env.example for more info)
-$ heroku config:set CLIENT_ID=0
-$ heroku config:set GUILD_ID=0
-$ heroku config:set BOT_TOKEN=XXX.YYY.ZZZ
-
-# Turn off the web dyno as this is a bot with only a backend worker dyno
-$ heroku ps:scale web=0 worker=1
-
-# Now you can push code to Heroku and trigger a build any time
-$ git push heroku main
-```
-
-To deploy new code to Heroku, just push to the `main` branch and do a `git push heroku main` to trigger a build.
+Note: Ensure you have set up the necessary environment variables (CLIENT_ID, GUILD_ID, BOT_TOKEN) in your AWS account or directly in the CDK stack.
 
 ## Inviting Your Bot to Your Server
 

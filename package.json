@@ -11,16 +11,23 @@
     "lint": "eslint src/index.ts --fix",
     "deploy": "git push heroku main",
     "test": "vitest",
-    "coverage": "vitest run --coverage"
+    "cdk": "cdk",
+    "cdk:synth": "cdk synth -a 'npx ts-node --prefer-ts-exts cdk/app.ts'",
+    "cdk:deploy": "cdk deploy -a 'npx ts-node --prefer-ts-exts cdk/app.ts'",
+    "cdk:diff": "cdk diff -a 'npx ts-node --prefer-ts-exts cdk/app.ts'"
   },
   "dependencies": {
+    "@aws-cdk/aws-ec2": "^1.x.x",
+    "@aws-cdk/aws-ecs": "^1.x.x",
+    "@aws-cdk/core": "^1.x.x",
     "@discordjs/builders": "^0.6.0",
     "@discordjs/rest": "^0.1.0-canary.0",
+    "aws-cdk": "^2.x.x",
+    "aws-cdk-lib": "^2.x.x",
     "discord-api-types": "^0.23.1",
     "discord.js": "^13.2.0",
     "dotenv": "^16.4.5",
-    "eslint": "^7.32.0",
-    "ts-node": "^10.9.2"
+    "eslint": "^7.32.0"
   },
   "keywords": [
     "node",
@@ -30,7 +37,10 @@
   ],
   "license": "MIT",
   "devDependencies": {
+    "@types/node": "^22.5.5",
     "@vitest/coverage-v8": "^2.0.5",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.6.2",
     "vitest": "^2.0.5"
   }
 }
